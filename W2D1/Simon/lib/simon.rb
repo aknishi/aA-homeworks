@@ -12,7 +12,7 @@ class Simon
   def play
     until @game_over == true
       take_turn
-      system("clear")
+      system('clear')
     end
 
     game_over_message
@@ -22,24 +22,27 @@ class Simon
   def take_turn
     show_sequence
     guess = require_sequence
-    unless game_over
+    @seq.each.with_index do |color, idx|
+      @game_over = true if color[0] != guess[idx]
+    end
+    # @game_over = true unless @seq == guess
+    unless @game_over
       round_success_message
       @sequence_length += 1
     end
-    @game_over = true unless @seq == guess
   end
 
   def show_sequence
     add_random_color
     @seq.each {|color| puts color}
     sleep 0.75
-    system("clear")
+    system('clear')
     sleep 0.25
   end
 
   def require_sequence
-    print "Enter sequence: (ex: r, b, g, y)"
-    input_seq = gets.chomp.split(",")
+    print 'Enter sequence: (ex: r, b, g, y): '
+    input_seq = gets.chomp.split(',')
   end
 
   def add_random_color
@@ -47,7 +50,8 @@ class Simon
   end
 
   def round_success_message
-    print "Great job!"
+    print 'Great job!'
+    sleep 0.5
   end
 
   def game_over_message
@@ -59,4 +63,9 @@ class Simon
     @sequence_length = 1
     @game_over = false
   end
+end
+
+if  $PROGRAM_NAME == __FILE__
+  game = Simon.new
+  game.play
 end
