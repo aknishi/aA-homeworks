@@ -1,5 +1,7 @@
 class LRUCache
 
+  attr_reader :size
+
   def initialize(size)
     @size = size
     @cache = []
@@ -31,5 +33,5 @@ class LRUCache
 
   private
   # helper methods go here!
-
+  
 end
