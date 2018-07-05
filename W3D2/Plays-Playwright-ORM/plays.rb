@@ -33,7 +33,7 @@ class Play
       return nil unless play.length > 0
       Play.new(play.first)
   end
- luyt
+
   def self.find_by_playwright(name)
     playwright = Playwright.find_by_name(name)
     raise "#{name} not found" unless playwright
